@@ -1,0 +1,51 @@
+To setup an Active Directory Environment in VirtualBox you will need:
+Virtual Box Download https://www.virtualbox.org/wiki/Downloads
+Windows 10 ISO and Windows Server ISO
+Ubuntu Desktop
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Windows 2019 Server Setup In VirtualBox:
+On the Virtual Machine Name and Operating System
+- Write Name
+- Select ISO Image
+- Next
+
+Unattend Guest OS Install Setup
+- Create Username and Password
+- Create HostName
+- Create Domain Name: amado.server.local
+- Next
+
+Hardware:
+- Base Memory: 4096 MB
+- 2 CPU
+
+Virtual Hard Disk:
+- 50 GB
+
+Finish
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Once the Machine is Setup we can begin to promote the server to a Domain Controller:
+VirtualBox will setup the server and open a Command Prompt. In the command prompt run powershell.exe:
+C:\Users\admin> powershell.exe
+
+For this instance we will convert the evaluation server to the ServerDatacenterCor using the following command:
+C:\Users\admin> DISM /online /Set-Edition:ServerDatacenterCor /ProductKey:XXXXX-XXXXX-XXXXX-XXXXX-XXXXX /AcceptEula
+**Add your own Product Key**
+
+Once done upgrading restart the Server by typing Y.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Configure Active Directory:
+Once machine restarts switch back to powershell:
+C:\Users\admin> powershell.exe
+
+Type the following to create Active Directory:
+C:\Users\admin> Add-WindowsFeature AD-Domain-Services
+
+Create an Active Directory Forest:
+C:\Users\admin> Install-ADDSForest -DomainName amado.local -InstallDNS
+
+This will prompt you to create a SafeModeAdministratorPassword. (MAKE IT SOMETHING YOU CAN REMEMBER)
+
+Once done type A and hit Enter.
+
+Active Directory is now installed, this server is now a Domain Controller and DNS is installed.
