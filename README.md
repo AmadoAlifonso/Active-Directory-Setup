@@ -6,8 +6,8 @@ This repository will document every step I take in creating a PowerShell script 
 
  
 <h2>languages and utlitites used</h2>
- -<b>PowerShell</b>
+ -<b>PowerShell</b><br/>
  -<b>Active Directory</b>
 
-<h2>Envirornment Used</h2>
+<h2>Environment Used</h2>
  -<b>Windows</b>
